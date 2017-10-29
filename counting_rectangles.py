@@ -18,7 +18,7 @@ def subRectangles(length, width):
     The sum of the first n natural numbers excluding 0 = n*(n+1)/2.
     So, L x W = (L*(L+1)/2) x (W*(W+1)/2) = (L*W*(L+1)*(W+1))/4 
     '''
-    pass
+    return (length*width*(length+1)*(width+1))/4
 
 def main():
     pass
