@@ -21,7 +21,7 @@ def subRectangles(length, width):
     The sum of the first n natural numbers excluding 0 = n*(n+1)/2.
     So, L x W = (L*(L+1)/2) x (W*(W+1)/2) = (L*W*(L+1)*(W+1))/4.
     '''
-    return (length*width*(length+1)*(width+1))/4
+    return int((length*width*(length+1)*(width+1))/4)
 
 def getLargestDimension(goal):
     '''
@@ -37,7 +37,7 @@ def getLargestDimension(goal):
     Checks via brute force, starting at the square root of the goal.
     '''
     current = int(math.sqrt(goal))
-    while subRectangleS(current, 1) < goal:
+    while subRectangles(current, 1) < goal:
         current += 1
     return current
 
@@ -55,14 +55,14 @@ def findNearest(goal):
     subrectangles differently, checks must continue until a square rectangle 
     is reached, and each new best area must be stored.
     '''
-    L = getLargestDimension(args.goal)
+    L = getLargestDimension(goal)
     W = 1
     nearest_distance = float('inf')
     nearest_dimensions = L, W
 
     while True:
         subs = subRectangles(L, W)
-        distance = math.abs(subs - goal) 
+        distance = math.fabs(subs - goal) 
 
         # better dimensions found: update
         if distance < nearest_distance: 
@@ -82,7 +82,7 @@ def findNearest(goal):
         if L < W:  # once L < W, we've crossed the square and won't see anything new
             break
 
-    return L, W
+    return nearest_dimensions
     
 
 def main():
@@ -94,6 +94,7 @@ def main():
     print('Dimensions:', L, 'x', W)
     print('Area:', L*W)
     print('Rectangles:', subRectangles(L, W))
+    
 
 if __name__ == '__main__':
     main()
