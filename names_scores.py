@@ -11,6 +11,34 @@ What is the total of all the name scores in the file?"
 
 import argparse
 
+def scoreName(name, weight=1):
+    '''
+    produces a score for a name, weighted by a given value.
+    '''
+    char_scores = dict(zip('abcdefghijklmnopqrstuvwxyz', range(1, 27)))  
+    return weight * sum(map(char_scores.get, name.lower()))
+  
+
+def readNames(filename):
+    '''
+    Reads names from the Project Euler file "names.txt" format.
+    Returns a list of names.
+    '''
+    with open(filename, 'r') as f:
+        names = f.read().split(',')
+    # map object can be sorted, but has no len()!
+    return list(map(lambda x: x.strip('"'), names))
+
+
+def weightNames(names):
+    '''
+    Sorts names alphanumerically and returns a dictionary that maps them to a 
+    weight according to their sorted position.
+    
+    Does not ignore case!
+    '''
+    return dict(zip(sorted(names),  # hybrid of merge sort and insertion sort 
+                    range(1, len(names)+1)))
 
 
 def main():
@@ -21,7 +49,8 @@ def main():
     ap.add_argument('filename', nargs='?', default=filename)
     args = ap.parse_args()
 
-    total = None
+    weights = weightNames(readNames(args.filename))
+    total = sum([scoreName(name, weight) for name, weight in weights.items()])
     
     print('Total for all scores:', total)
 
