@@ -7,8 +7,8 @@ Problem 8
 Given a particular window size that slides along subsequences of an integer, 
 what is the largest product of the elements of the window?
 
-There are two implementations to this problem supplied in product_series.py.  
-Both support a generalized function that is specified when the script is used.  
+There are two implementations to this problem supplied in product_series.py. 
+Both support a generalized function that is specified when the script is used. 
 The script does not accept arbitrary functions for security reasons.
 
 ## Names scores
