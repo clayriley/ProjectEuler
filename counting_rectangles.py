@@ -1,6 +1,6 @@
 #!/usr/bin/python
 '''
-an implementation of the Project Euler problem 85, "Counting rectangles":
+An implementation of Project Euler problem 85, Counting Rectangles:
 
 "By counting carefully it can be seen that a rectangular grid measuring 3 by 2 
 contains eighteen rectangles.
