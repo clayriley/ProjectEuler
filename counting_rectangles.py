@@ -41,10 +41,10 @@ def getLargestDimension(goal):
         current += 1
     return current
 
-def search(goal):
+def findNearest(goal):
     '''
-    given the goal, finds the rectangular area of the dimensions resulting in 
-    the number of subrectangles nearest to goal.
+    given the goal, finds the rectangular dimensions resulting in the number of 
+    subrectangles nearest to goal.
     
     By starting with the largest possible difference between the two dimensions
     L and W, the goal can be approached by decrementing L or by incrementing W.
@@ -58,26 +58,37 @@ def search(goal):
     L = getLargestDimension(args.goal)
     W = 1
     nearest_distance = float('inf')
-    area = L*W
+    nearest_dimensions = L, W
     while True:
         subs = subRectangles(L, W)
         distance = math.abs(subs - goal) 
-        if distance < nearest_distance:  # then update best area
-            area = L*W
+        # better dimensions found: update
+        if distance < nearest_distance: 
+            nearest_dimensions = L, W
             nearest_distance = distance
-        # stop right here if goal has been struck
-        # decrement larger dimension if goal is still below
-        if goal < 
         # increment smaller dimension if goal is now above
-    if L < W:  # once L < W, we've crossed the square and are repeating work!
+        if subs < goal:
+            W += 1
+        # decrement larger dimension if goal is still below
+        elif subs > goal:
+            L -= 1
+        # stop early if goal has been struck!
+        else:
+            break
+    if L < W:  # once L < W, we've crossed the square and won't see anything new
         break
-    return area
+    return L, W
     
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('goal', type='int', nargs='?', default=2000000)
     args = ap.parse_args()
+    print('Finding rectangle with subrectangles nearest to', args.goal, '...')
+    L, W = findNearest(args.goal)
+    print('Dimensions:', L, 'x', W)
+    print('Area:', L*W)
+    print('Rectangles:', subRectangles(L, W))
 
 if __name__ == '__main__':
     main()
