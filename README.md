@@ -1,6 +1,8 @@
 # ProjectEuler
 Implementations of solutions to the Project Euler problem series.
 
+https://projecteuler.net/
+
 ## Largest product in a series
 Problem 8
 
