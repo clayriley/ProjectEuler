@@ -59,13 +59,16 @@ def findNearest(goal):
     W = 1
     nearest_distance = float('inf')
     nearest_dimensions = L, W
+
     while True:
         subs = subRectangles(L, W)
         distance = math.abs(subs - goal) 
+
         # better dimensions found: update
         if distance < nearest_distance: 
             nearest_dimensions = L, W
             nearest_distance = distance
+
         # increment smaller dimension if goal is now above
         if subs < goal:
             W += 1
@@ -75,8 +78,10 @@ def findNearest(goal):
         # stop early if goal has been struck!
         else:
             break
-    if L < W:  # once L < W, we've crossed the square and won't see anything new
-        break
+
+        if L < W:  # once L < W, we've crossed the square and won't see anything new
+            break
+
     return L, W
     
 
