@@ -87,7 +87,7 @@ def findNearest(goal):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('goal', type='int', nargs='?', default=2000000)
+    ap.add_argument('goal', type=int, nargs='?', default=2000000)
     args = ap.parse_args()
     print('Finding rectangle with subrectangles nearest to', args.goal, '...')
     L, W = findNearest(args.goal)
