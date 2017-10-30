@@ -29,11 +29,6 @@ def getLargestDimension(goal):
     with 1, yields at least the goal number of rectangles.  This is the largest
     possible dimension of the rectangle whose area solves this problem.
 
-    (x*y*(x+1)*(y+1))/4 
-    = (x*1*(x+1)*(1+1))/4 
-    = (x*(x+1)*(2))/4 
-    = (x*(x+1))/2
-
     Checks via brute force, starting at the square root of the goal.
     '''
     current = int(math.sqrt(goal))
