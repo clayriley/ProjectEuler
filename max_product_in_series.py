@@ -47,7 +47,7 @@ def findMaxA(sequence, window, function):
     if type(sequence) is int:
         sequence = str(sequence)
 
-    if len(sequence) > window:
+    if len(sequence) < window:
         raise IOError('Window is larger than sequence.')
 
     for span in range(0, len(sequence) + 1 - window):
@@ -55,7 +55,7 @@ def findMaxA(sequence, window, function):
         pass
 
 
-findMaxB(sequence, window, function):
+def findMaxB(sequence, window, function):
     '''
     Uses list comprehension to find the maximum product within a window over an 
     integer.  This is the same as calling findMax().  It makes an additional 
@@ -69,7 +69,7 @@ findMaxB(sequence, window, function):
     if type(sequence) is int:
         sequence = str(sequence)
 
-    if len(sequence) > window:
+    if len(sequence) < window:
         raise IOError('Window is larger than sequence.')
 
     # returns the maximum of the list created by calling function 
