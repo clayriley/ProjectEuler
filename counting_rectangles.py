@@ -17,9 +17,18 @@ def subRectangles(length, width):
     returns the number of rectangles with integer dimensions that the rectangle 
     of the given dimensions consists of.
 
-    Each dimension D produces (sum of integers from 1 to D) subrectangles for each unit of the other dimension.
-    The sum of the first n natural numbers excluding 0 = n*(n+1)/2.
+    Each dimension D produces (sum of integers from 1 to D) subrectangles for 
+    each unit of the other dimension.  The sum of the first n natural numbers 
+    excluding 0 is n*(n+1)/2.
+
     So, L x W = (L*(L+1)/2) x (W*(W+1)/2) = (L*W*(L+1)*(W+1))/4.
+
+    A 1x4 rectangle has 
+        4 (1x1) + 3 (1x2) + 2 (1x3) + 1 (1x4) = 10 subrectangles.
+    A 2x4 rectangle then has a pair of each of these, 
+        + 4 (2x1) + 3 (2x2) + 2 (2x3) + 1 (2x4) = 30 subrectangles.
+    It can be seen that each increment of a dimension multiplies the result by 
+    the amount that increment adds on its own.
     '''
     return int((length*width*(length+1)*(width+1))/4)
 
