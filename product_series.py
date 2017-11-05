@@ -14,9 +14,9 @@ greatest product. What is the value of this product?"
 import argparse
 
 
-def applyElementwise(function, iterable):
+def applySuccessively(function, iterable):
     '''
-    Applies elements of an iterable sequentially to a function that returns its 
+    Applies elements of an iterable successively to a function that returns its 
     own input type, given two elements of that type.
     '''
     result = None
@@ -32,16 +32,16 @@ def applyElementwise(function, iterable):
 def findMaxA(sequence, window, function):
     '''
     Find the maximum result of applying to the given function each digit (and 
-    the previous result) within a window that is slid across the input number.
-    The window is not padded, so the window is always full.  The function should 
-    take two integers as input and return an integer.
+    the previous result) successively within a window that is slid across the 
+    input number.  The window is not padded, so the window is always full.  The 
+    function should take two integers as input and return an integer.
 
     For example, with sequence=12345, window=3, function=lambda x,y: x+y; we see
 
     [((1 + 2) + 3) = 6]45 -> 1[((2 + 3) + 4) = 9]5 -> 12[(3 + 4) + 5) = 12]
 
-    The maximum result of adding each element in the window places the window 
-    over the subsequence [3, 4, 5].
+    The maximum result of adding each sequence of 3 digits successively is found 
+    where the window is positioned over the subsequence [3, 4, 5].
 
     This function is O(n).
     '''
@@ -52,10 +52,10 @@ def findMaxA(sequence, window, function):
         raise IOError('Window is larger than sequence.')
 
     # initialize with the first window
-    largest = applyElementwise(function, sequence[0:window])
+    largest = applySuccessively(function, sequence[0:window])
 
     for span in range(0, len(sequence) + 1 - window):
-        current = applyElementwise(function, sequence[span:span+window])
+        current = applySuccessively(function, sequence[span:span+window])
         if current > largest:
             largest = current
     
@@ -65,7 +65,7 @@ def findMaxA(sequence, window, function):
 def findMaxB(sequence, window, function):
     '''
     Uses list comprehension to find the maximum product within a window over an 
-    integer.  This is the same as calling findMax().  It makes an additional 
+    integer.  This is the same as calling findMaxA().  It makes an additional 
     pass over the sequence in order to use the max() function, but is still O(n) 
     and is more compact.
     '''
@@ -77,11 +77,11 @@ def findMaxB(sequence, window, function):
         raise IOError('Window is larger than sequence.')
 
     # returns the maximum of the list created by calling function on each window
-    # elementwise after mapping its elements to integers.
+    # successively (elementwise) after mapping its elements to integers.
     # The integer map is not actually required, since applyElementwise()
     # performs this step.
    
-    return max([applyElementwise(function, map(int, sequence[i:i+window]))
+    return max([applySuccessively(function, map(int, sequence[i:i+window]))
                 for i in range(0, len(sequence) + 1 - window)])
     
 
@@ -108,6 +108,7 @@ def main():
                '05886116467109405077541002256983155200055935729725' + \
                '71636269561882670428252483600823257530420752963450'
 
+    # TODO: put this into argparse opts
     operations = {'x' : (lambda x,y: x*y),
                   '*' : (lambda x,y: x*y),
                   '+' : (lambda x,y: x+y),
